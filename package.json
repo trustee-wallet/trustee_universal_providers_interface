@@ -1,0 +1,18 @@
+{
+  "name": "trustee_universal_providers_interface",
+  "version": "1.0.0",
+  "description": "",
+  "main": "signature.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gl.blocksoftlab.com/vlad82010/trustee_universal_providers_interface.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
