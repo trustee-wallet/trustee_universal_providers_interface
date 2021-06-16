@@ -1,5 +1,8 @@
 const crypto = require('crypto');
 
+/**
+ * These are test keys
+ */
 const PUBLIC_KEY = 'lQDPDlxi5sb1ABKXOAjLIF2L9ISTjKqSIvrVylKX';
 const PRIVATE_KEY = 'UvdvS3KF7zTFKdbGzDoIDgz7P4XDSQSBWv25crzu';
 
