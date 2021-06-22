@@ -3,6 +3,7 @@
 ## Introduction
 
 Each method must be implemented as a separate API endpoint.
+
 Methods **estimate amount**, **create order**, **check order** and **cancel order** must be authenticated.
 
 ## Exchange ways file
@@ -59,15 +60,18 @@ https://testapiv3.trustee.deals/trustee-universal/check-signature
 `
 
 ### Request body:
+
 body that will be used to generate signature.
 
 ### Request headers:
+
 | Header | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
 | **trustee-public-key** | String  | required | Partner's public key. |
 | **trustee-timestamp**  | String | required | Timestamp which will be used to generate signature. |
 
 ### Response body:
+
 | Parameter | Type |  Description |
 | ------ | ------ | ------ |
 | **parametersSequence** | String  | Sequence of parameters for **initString**. |
@@ -75,6 +79,7 @@ body that will be used to generate signature.
 | **signature**  | String | Signature for request body. |
 
 ### Response headers:
+
 | Header | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
 | **trustee-timestamp** | String  | required | Timestamp which was used to generate a response signature. |
@@ -85,6 +90,7 @@ With the help of **Response headers**, you can check the generation of response 
 ## POST: Estimate amount
 
 ### Request body:
+
 | Parameter | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
 | **from** | String  | required | Code for **from** currency. Same as in the exchange ways file. |
@@ -115,6 +121,7 @@ With the help of **Response headers**, you can check the generation of response 
 \* – One of the parameters (**fromRate** or **toRate**) must be "1", and the other show the rate.
 
 #### Example:
+
 Trustee fee is 0.5%.
 
 0.5% from 6500 = 32.5 RUB (**extraFromFee**)
@@ -124,16 +131,142 @@ Trustee fee is 0.5%.
 0.0021 BTC – 0.0005 BTC (**toFee**) = 0.0016 BTC (**toAmount**).
 
 #### In case of error:
+
 | Parameter | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
-| **errorCode** | String  | required | Сode for error. |
+| **errorCode** | String  | required | Code for error. |
 | **message**  | String | required | Error description. |
 | **minAmount** or **maxAmount** | Number  | required\* | The limit on which the user has not passed. You need to transmit only one parameter. |
 
 \* – **minAmount** or **maxAmount** must be transmitted only when the **errorCode** is equal to "EXCEEDING_LIMITS".
 
 #### Error codes list:
+
 | Parameter |  Description |
 | ------ | ------ |
 | **EXCEEDING_LIMITS** | The user has not passed on acceptable limits. |
 | **PROVIDER_ERROR**  | Any other error. |
+
+## POST: Create order
+
+### Request body:
+
+| Parameter | Type | Required |  Description |
+| ------ | ------ | ------ | ------ |
+| **from** | String  | required | Сode for **from** currency. Same as in the exchange ways file. |
+| **to**  | String | required | Сode for **to** currency. Same as in the exchange ways file. |
+| **fromAmount** | Number  | required | The amount that the client must pay. |
+| **toAmount** | Number  | required | The amount that the client will receive. |
+| **userId** | String  | optional | Anonymous user ID. |
+| **redirectUrl** | String  | required | The amount that the client will receive. |
+| **toPaymentDetails** | String  | required | Payment details of where the user will receive funds. |
+| **fromPaymentDetails** | String  | optional | Payment details from which will take funds. |
+| **toMemo** | String  | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
+| **extraFromFee**\*  | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **from** currency. |
+| **extraToFee**\*  | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **to** currency. |
+
+\* – If Trustee fee is 0.5% then 0.005 must be transmitted.
+
+\*\* – If the exchanger does not support the dynamic setting of fees (**extraFromFee** and **extraToFee** parameters), then it can set it statically on its side. In this case, different Trustee fees will be set for different pairs of API keys.
+
+### Response body:
+
+| Parameter | Type | Required |  Description |
+| ------ | ------ | ------ | ------ |
+| **id** | String | required | Order ID. |
+| **payUrl** | String | required\* | Link to pay fiat. It needs to be opened to the client. |
+| **cryptoAddress** | String | required\* | Cryptocurrency address where the client needs to send money. |
+| **cryptoMemo** | String | optional | Additional information to the **cryptoAddress** (need for example for XRP currency). |
+| **from** | String  | required | Сode for **from** currency. Same as in the exchange ways file. |
+| **to**  | String | required | Сode for **to** currency. Same as in the exchange ways file. |
+| **fromAmount** | Number  | required | The amount that the client must pay. |
+| **toAmount** | Number  | required | The amount that the client will receive. |
+| **userId** | String  | optional | Anonymous user ID. |
+| **redirectUrl** | String  | required | The amount that the client will receive. |
+| **toPaymentDetails** | String  | required | Payment details of where the user will receive funds. |
+| **fromPaymentDetails** | String  | optional | Payment details from which will take funds. |
+| **toMemo** | String  | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
+| **extraFromFee**  | Number | required | Trustee fee which will be taken from the **from** currency. |
+| **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. |
+
+\* – Only one of the parameter must be returned in the response. It depends on whether the client needs to make a fiat deposit or crypto deposit.
+
+All parameters that were used when creating should return to the response.
+
+#### In case of error:
+
+| Parameter | Type | Required |  Description |
+| ------ | ------ | ------ | ------ |
+| **message**  | String | required | Error description. |
+
+## GET: Check order
+
+### Request body (Query string):
+
+| Parameter | Type | Required |  Description |
+| ------ | ------ | ------ | ------ |
+| **id** | String  | required | Order ID. |
+
+### Response body:
+
+| Parameter | Type | Required |  Description |
+| ------ | ------ | ------ | ------ |
+| **id** | String | required | Order ID. |
+| **status** | String | required | Order status |
+| **payUrl** | String | required\* | Link to pay fiat. It needs to be opened to the client. |
+| **cryptoAddress** | String | required\* | Cryptocurrency address where the client needs to send money. |
+| **cryptoMemo** | String | optional | Additional information to the **cryptoAddress** (need for example for XRP currency). |
+| **from** | String  | required | Сode for **from** currency. Same as in the exchange ways file. |
+| **to**  | String | required | Сode for **to** currency. Same as in the exchange ways file. |
+| **fromAmount** | Number  | required | The amount that the client must pay. |
+| **toAmount** | Number  | required | The amount that the client will receive. |
+| **userId** | String  | optional | Anonymous user ID. |
+| **redirectUrl** | String  | required | The amount that the client will receive. |
+| **toPaymentDetails** | String  | required | Payment details of where the user will receive funds. |
+| **fromPaymentDetails** | String  | optional | Payment details from which will take funds. |
+| **toMemo** | String  | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
+| **fromTxHash** | String  | required | Hash transaction of client deposit. |
+| **toTxHash** | String  | required | Hash transaction of payment to the client. |
+| **extraFromFee**  | Number | required | Trustee fee which will be taken from the **from** currency. |
+| **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. |
+
+\* – Only one of the parameter must be returned in the response. It depends on whether the client needs to make a fiat deposit or crypto deposit.
+
+### Order statuses
+
+| Status |  Description |
+| ------ | ------ |
+| **WAITING** | Waiting for client deposit. |
+| **RECEIVED**  | Received client deposit. |
+| **EXCHANGING** | Exchange is carried out. |
+| **SENDING**  | In the process of payment to the client. |
+| **COMPLETED** | Order successfully completed. |
+| **NOT_ENTIRE_WITHDRAW**  | Not the whole amount is paid (occurs during fiat conclusions). In this case, the amount that the client has already received should be specified in **toAmount**. |
+| **REFUNDED** | The money was returned to the client. |
+| **EXPIRED**  | The order was not paid for the time allocated (some exchangers know how to automatically restore such orders by recalculating the course through another endpoint). |
+| **CANCELED** | The order was canceled. |
+| **FAILED**  | In the process of execution of the order, an error occurred. |
+| **HOLDED** | The warrant is suspended to check KYC. |
+
+#### In case of error:
+| Parameter | Type | Required |  Description |
+| ------ | ------ | ------ | ------ |
+| **message**  | String | required | Error description. |
+
+## POST: Cancel order
+
+### Request body:
+
+| Parameter | Type | Required |  Description |
+| ------ | ------ | ------ | ------ |
+| **id** | String  | required | Order ID. |
+
+### Response body:
+| Parameter | Type | Required |  Description | Example
+| ------ | ------ | ------ | ------ | ------ |
+| **status** | String  | required | Status of the canceling. | SUCCESS |
+
+#### In case of error:
+| Parameter | Type | Required |  Description |
+| ------ | ------ | ------ | ------ |
+| **message**  | String | required | Error description. |
