@@ -1,18 +1,16 @@
 # Trustee Universal Interface
 
----
-
 ## Introduction
 
 Each method must be implemented as a separate API endpoint.
 Methods **estimate amount**, **create order**, **check order** and **cancel order** must be authenticated.
 
----
-
 ## Exchange ways file
 
 You must implement an endpoint that will return a list of exchange ways.
+
 Requirements for the exchange ways file are the same as for exchanger monitors.
+
 Here is an [example of documentation](https://www.bestchange.com/wiki/rates.html) on how to properly create a exchange ways file.
 
 ```xml
@@ -42,8 +40,6 @@ Here is an [example of documentation](https://www.bestchange.com/wiki/rates.html
 </rates>
 ```
 
----
-
 ## Authentication
 
 Authentication parameters are passed to **headers**:
@@ -55,7 +51,9 @@ Authentication parameters are passed to **headers**:
 | **trustee-signature** | String | required | Signature. |
 
 An [example](https://github.com/trustee-wallet/trustee_universal_providers_interface/blob/master/signature.js) of generating a signature.
+
 You can check the signature using this endpoint (*first you need to share a API keys with the Trustee team*):
+
 `
 https://testapiv3.trustee.deals/trustee-universal/check-signature
 `
@@ -84,8 +82,6 @@ body that will be used to generate signature.
 
 With the help of **Response headers**, you can check the generation of response signature. It is identical to the request signature process.
 
----
-
 ## POST: Estimate amount
 
 ### Request body:
@@ -98,6 +94,7 @@ With the help of **Response headers**, you can check the generation of response 
 | **extraToFee**\*  | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **to** currency. |
 
 \* – If Trustee fee is 0.5% then 0.005 must be transmitted.
+
 \*\* – If the exchanger does not support the dynamic setting of fees (**extraFromFee** and **extraToFee** parameters), then it can set it statically on its side. In this case, different Trustee fees will be set for different pairs of API keys.
 
 ### Response body:
@@ -119,8 +116,11 @@ With the help of **Response headers**, you can check the generation of response 
 
 #### Example:
 Trustee fee is 0.5%.
+
 0.5% from 6500 = 32.5 RUB (**extraFromFee**)
+
 6500 RUB – 32.5 RUB = 6467.5 RUB * 3079761.9 (**fromRate**) = 0.0021 BTC
+
 0.0021 BTC – 0.0005 BTC (**toFee**) = 0.0016 BTC (**toAmount**).
 
 #### In case of error:
@@ -137,5 +137,3 @@ Trustee fee is 0.5%.
 | ------ | ------ |
 | **EXCEEDING_LIMITS** | The user has not passed on acceptable limits. |
 | **PROVIDER_ERROR**  | Any other error. |
-
----
