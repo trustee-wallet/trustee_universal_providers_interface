@@ -6,13 +6,13 @@ Each method must be implemented as a separate API endpoint.
 
 Methods **estimate amount**, **create order**, **check order** and **cancel order** must be authenticated.
 
-## Exchange ways file
+## GET: Exchange ways list
 
 You must implement an endpoint that will return a list of exchange ways.
 
-Requirements for the exchange ways file are the same as for exchanger monitors.
+Requirements for the exchange ways list are the same as for exchanger monitors.
 
-Here is an [example of documentation](https://www.bestchange.com/wiki/rates.html) on how to properly create a exchange ways file.
+Here is an [example of documentation](https://www.bestchange.com/wiki/rates.html) on how to properly create a exchange ways list.
 
 ```xml
 <rates>
@@ -89,12 +89,14 @@ With the help of **Response headers**, you can check the generation of response 
 
 ## POST: Estimate amount
 
+> The endpoint must have request and response authentication.
+
 ### Request body:
 
 | Parameter | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
-| **from** | String  | required | Code for **from** currency. Same as in the exchange ways file. |
-| **to**  | String | required | Code for **to** currency. Same as in the exchange ways file. |
+| **from** | String  | required | Code for **from** currency. Same as in the exchange ways list. |
+| **to**  | String | required | Code for **to** currency. Same as in the exchange ways list. |
 | **fromAmount** or **toAmount** | Number  | required | The amount for which you need to calculate. Transmitted in the **from** currency or **to** currency. |
 | **extraFromFee**\*  | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **from** currency. |
 | **extraToFee**\*  | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **to** currency. |
@@ -107,8 +109,8 @@ With the help of **Response headers**, you can check the generation of response 
 
 | Parameter | Type | Required |  Description | Example
 | ------ | ------ | ------ | ------ | ------ |
-| **from** | String  | required | Code for **from** currency. Same as in the exchange ways file. | CARDRUB |
-| **to**  | String | required | Code for **to** currency. Same as in the exchange ways file. | BTC |
+| **from** | String  | required | Code for **from** currency. Same as in the exchange ways list. | CARDRUB |
+| **to**  | String | required | Code for **to** currency. Same as in the exchange ways list. | BTC |
 | **fromAmount** | Number  | required | The amount that the client must pay. | 6500 |
 | **toAmount** | Number  | required | The amount that the client will receive. | 0.0016 |
 | **fromRate**\* | Number  | required | Rate that is represented in the **from** currency. | 3079761.9 |
@@ -120,7 +122,7 @@ With the help of **Response headers**, you can check the generation of response 
 
 \* – One of the parameters (**fromRate** or **toRate**) must be "1", and the other show the rate.
 
-#### Example:
+#### Calculation example:
 
 Trustee fee is 0.5%.
 
@@ -149,12 +151,14 @@ Trustee fee is 0.5%.
 
 ## POST: Create order
 
+> The endpoint must have request and response authentication.
+
 ### Request body:
 
 | Parameter | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
-| **from** | String  | required | Сode for **from** currency. Same as in the exchange ways file. |
-| **to**  | String | required | Сode for **to** currency. Same as in the exchange ways file. |
+| **from** | String  | required | Сode for **from** currency. Same as in the exchange ways list. |
+| **to**  | String | required | Сode for **to** currency. Same as in the exchange ways list. |
 | **fromAmount** | Number  | required | The amount that the client must pay. |
 | **toAmount** | Number  | required | The amount that the client will receive. |
 | **userId** | String  | optional | Anonymous user ID. |
@@ -177,8 +181,8 @@ Trustee fee is 0.5%.
 | **payUrl** | String | required\* | Link to pay fiat. It needs to be opened to the client. |
 | **cryptoAddress** | String | required\* | Cryptocurrency address where the client needs to send money. |
 | **cryptoMemo** | String | optional | Additional information to the **cryptoAddress** (need for example for XRP currency). |
-| **from** | String  | required | Сode for **from** currency. Same as in the exchange ways file. |
-| **to**  | String | required | Сode for **to** currency. Same as in the exchange ways file. |
+| **from** | String  | required | Сode for **from** currency. Same as in the exchange ways list. |
+| **to**  | String | required | Сode for **to** currency. Same as in the exchange ways list. |
 | **fromAmount** | Number  | required | The amount that the client must pay. |
 | **toAmount** | Number  | required | The amount that the client will receive. |
 | **userId** | String  | optional | Anonymous user ID. |
@@ -201,6 +205,8 @@ All parameters that were used when creating should return to the response.
 
 ## GET: Check order
 
+> The endpoint must have request and response authentication.
+
 ### Request body (Query string):
 
 | Parameter | Type | Required |  Description |
@@ -216,8 +222,8 @@ All parameters that were used when creating should return to the response.
 | **payUrl** | String | required\* | Link to pay fiat. It needs to be opened to the client. |
 | **cryptoAddress** | String | required\* | Cryptocurrency address where the client needs to send money. |
 | **cryptoMemo** | String | optional | Additional information to the **cryptoAddress** (need for example for XRP currency). |
-| **from** | String  | required | Сode for **from** currency. Same as in the exchange ways file. |
-| **to**  | String | required | Сode for **to** currency. Same as in the exchange ways file. |
+| **from** | String  | required | Сode for **from** currency. Same as in the exchange ways list. |
+| **to**  | String | required | Сode for **to** currency. Same as in the exchange ways list. |
 | **fromAmount** | Number  | required | The amount that the client must pay. |
 | **toAmount** | Number  | required | The amount that the client will receive. |
 | **userId** | String  | optional | Anonymous user ID. |
@@ -254,6 +260,8 @@ All parameters that were used when creating should return to the response.
 | **message**  | String | required | Error description. |
 
 ## POST: Cancel order
+
+> The endpoint must have request and response authentication.
 
 ### Request body:
 
