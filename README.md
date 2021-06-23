@@ -4,6 +4,8 @@
 
 Each method must be implemented as a separate API endpoint.
 
+![General](https://github.com/trustee-wallet/trustee_universal_providers_interface/blob/master/img/General.png)
+
 ## GET: Exchange ways list
 
 You must implement an endpoint that will return a list of exchange ways.
