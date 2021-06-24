@@ -15,7 +15,7 @@ const body = {
 const now = +new Date();
 const keys = Object.keys(body).sort();
 let initString = '';
-let parametersSequence = '';
+let parametersSequence = ''; // needed only for check the initString generation sequence.
 
 for (let i = 0; i < keys.length; i++) {
     if (!body[keys[i]] || typeof body[keys[i]] === 'object') {
