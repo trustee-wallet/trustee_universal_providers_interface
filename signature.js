@@ -14,18 +14,24 @@ const body = {
 
 const now = +new Date();
 const keys = Object.keys(body).sort();
-let str = '';
+let initString = '';
+let parametersSequence = '';
 
 for (let i = 0; i < keys.length; i++) {
     if (!body[keys[i]] || typeof body[keys[i]] === 'object') {
         continue;
     }
-    str += body[keys[i]].toString().toLowerCase();
+    initString += keys[i].toLowerCase() + body[keys[i]].toString().toLowerCase();
+    parametersSequence += keys[i] + ' | ';
 }
-str += now;
 
-const signature = crypto.createHmac('SHA512', PRIVATE_KEY).update(str).digest('hex');
+initString += 'timestamp' + now;
+parametersSequence += 'timestamp';
 
+const signature = crypto.createHmac('SHA512', PRIVATE_KEY).update(initString).digest('hex');
+
+console.log('parametersSequence: ' + parametersSequence);
+console.log('initString: ' + initString + '\n');
 console.log('Headers:');
 console.log('trustee-public-key: ' + PUBLIC_KEY);
 console.log('trustee-timestamp: ' + now);
