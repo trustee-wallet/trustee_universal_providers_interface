@@ -41,6 +41,13 @@ Here is an [example of documentation](https://www.bestchange.com/wiki/rates.html
 </rates>
 ```
 
+If you need to specify a fixed and percentage fee together, then you can do this as follows:
+
+```xml
+<fromfee>5 UAH</fromfee>
+<fromfee>1.5 %</fromfee>
+```
+
 ## Authentication
 
 Methods **estimate amount**, **create order**, **check order** and **cancel order** must be authenticated.
