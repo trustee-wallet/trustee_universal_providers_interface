@@ -69,6 +69,7 @@ API keys are generated once by any side (Trustee or exchanger) and then share th
 | **trustee-public-key** | String  | optional | Partner's public key. |
 | **trustee-timestamp**  | String | required | Timestamp that was used to generate the signature. |
 | **trustee-signature** | String | required | Signature. |
+| **trustee-env** | String | optional | The environment where a request is sent *(LOCAL, DEV or PROD)*. |
 
 You can check the signature using this endpoint:
 
