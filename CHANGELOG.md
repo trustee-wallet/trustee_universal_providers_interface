@@ -1,5 +1,11 @@
 # Change Log
 
+## 2021-07-26
+
+### Added
+
+- Added new optional header for requests – **trustee-env** – which shows from which the environment sent a request. It can be *LOCAL, DEV or PROD*.
+
 ## 2021-07-13
 
 ### Added
