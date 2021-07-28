@@ -285,6 +285,7 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **to**  | String | required | Code for **to** currency. Same as in the exchange ways list. |
 | **fromAmount** | Number  | required | The amount that the client must pay. |
 | **toAmount** | Number  | required | The amount that the client will receive. |
+| **fromAmountReceived**\*\* | Number  | optional | The amount without a bank fee if it is (*only for Fiat -> Crypto exchange ways*). |
 | **userId** | String  | optional | Anonymous user ID. |
 | **redirectUrl** | String  | required | The amount that the client will receive. |
 | **toPaymentDetails** | String  | required | Payment details of where the user will receive funds. |
@@ -294,6 +295,8 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. |
 
 \* – Only one of the parameter must be returned in the response (**payUrl** or **payCryptoAddress**). It depends on whether the client needs to make a fiat deposit (**payUrl** must be returned) or crypto deposit (**payCryptoAddress** must be returned).
+
+\*\* If **fromAmount** = 500 UAH and bank fee = 3%, then **fromAmountReceived** = 485 UAH.
 
 All parameters that were used when creating should return to the response.
 
@@ -377,6 +380,7 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **to**  | String | required | Code for **to** currency. Same as in the exchange ways list. |
 | **fromAmount** | Number  | required | The amount that the client must pay. |
 | **toAmount** | Number  | required | The amount that the client will receive. |
+| **fromAmountReceived**\*\* | Number  | optional | The amount without a bank fee if it is (*only for Fiat -> Crypto exchange ways*). |
 | **userId** | String  | optional | Anonymous user ID. |
 | **redirectUrl** | String  | required | The amount that the client will receive. |
 | **toPaymentDetails** | String  | required | Payment details of where the user will receive funds. |
@@ -388,6 +392,8 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. |
 
 \* – Only one of the parameter must be returned in the response (**payUrl** or **payCryptoAddress**). It depends on whether the client needs to make a fiat deposit (**payUrl** must be returned) or crypto deposit (**payCryptoAddress** must be returned).
+
+\*\* If **fromAmount** = 500 UAH and bank fee = 3%, then **fromAmountReceived** = 485 UAH.
 
 ### Order statuses
 

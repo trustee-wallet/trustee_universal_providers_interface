@@ -1,5 +1,11 @@
 # Change Log
 
+## 2021-07-28
+
+### Added
+
+- Added new optional parameter for order object – **fromAmountReceived** – amount without a bank fee if it is.
+
 ## 2021-07-26
 
 ### Added
