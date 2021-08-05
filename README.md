@@ -197,6 +197,8 @@ Trustee fee is 0.5%.
 | **minAmount** or **maxAmount**\* | Number  | required\* | The limit on which the user has not passed. You need to transmit only one parameter. |
 
 \* – **minAmount** or **maxAmount** must be transmitted only when the **errorCode** is equal to "EXCEEDING_LIMITS".
+If the **fromAmount** was transmitted to the request, then the limit must be specified in the **from** currency.
+If the **toAmount** was transmitted to the request, then the limit must be specified in the **to** currency.
 
 #### Error codes list:
 
