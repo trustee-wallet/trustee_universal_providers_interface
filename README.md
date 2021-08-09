@@ -441,6 +441,7 @@ curl --location --request GET '<EXCHANGER_ENDPOINT>?id=QCqQF7U2BTebKL3Z' \
     "to": "ETH",
     "fromAmount": 0.001,
     "toAmount": 0.013048,
+    "fromAmountReceived": 0,
     "fromRate": 1,
     "toRate": 16.682383815934614,
     "fromFee": 0,
@@ -499,6 +500,95 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 ```JSON
 {
     "status": "SUCCESS"
+}
+```
+
+#### Response headers:
+
+```JSON
+{
+    "trustee-timestamp": "1624455218707",
+    "trustee-signature": "ab3dafb47d7079735bbc7e0b0e67707abce2123d6e6d6bb8890a209fee58931d284bca36f4cc1ecf63419ad95184750e70a0550bd0ded9c60ab810b9bda46cbd"
+}
+```
+
+## POST: Restore EXPIRED order
+
+> The endpoint must have request and response authentication.
+
+### Request body:
+
+| Parameter | Type | Required |  Description |
+| ------ | ------ | ------ | ------ |
+| **id** | String  | required | Order ID. |
+
+### Response body:
+
+| Parameter | Type | Required |  Description |
+| ------ | ------ | ------ | ------ |
+| **id** | String | required | Order ID. |
+| **status** | String | required | Order status |
+| **payUrl**\* | String | required\* | Link to pay fiat. It needs to be opened to the client. |
+| **payCryptoAddress**\* | String | required\* | Cryptocurrency address where the client needs to send money. |
+| **payCryptoMemo** | String | optional | Additional information to the **payCryptoAddress** (need for example for XRP currency). |
+| **from** | String  | required | Code for **from** currency. Same as in the exchange ways list. |
+| **to**  | String | required | Code for **to** currency. Same as in the exchange ways list. |
+| **fromAmount** | Number  | required | The amount that the client must pay. |
+| **toAmount** | Number  | required | **Actual** amount that the client will receive. |
+| **fromAmountReceived**\*\* | Number  | optional | The amount without a bank fee if it is (*only for Fiat -> Crypto exchange ways*). |
+| **userId** | String  | optional | Anonymous user ID. |
+| **redirectUrl** | String  | required | The amount that the client will receive. |
+| **toPaymentDetails** | String  | required | Payment details of where the user will receive funds. |
+| **fromPaymentDetails** | String  | optional | Payment details from which will take funds. |
+| **toMemo** | String  | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
+| **fromTxHash** | String  | required | Hash transaction of client deposit. |
+| **toTxHash** | String  | required | Hash transaction of payment to the client. |
+| **extraFromFee**  | Number | required | Trustee fee which will be taken from the **from** currency. |
+| **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. |
+
+\* – Only one of the parameter must be returned in the response (**payUrl** or **payCryptoAddress**). It depends on whether the client needs to make a fiat deposit (**payUrl** must be returned) or crypto deposit (**payCryptoAddress** must be returned).
+
+\*\* If **fromAmount** = 500 UAH and bank fee = 3%, then **fromAmountReceived** = 485 UAH.
+
+#### In case of error:
+| Parameter | Type | Required |  Description |
+| ------ | ------ | ------ | ------ |
+| **message**  | String | required | Error description. |
+
+### Example:
+
+#### Request:
+
+```curl
+curl --location --request POST <EXCHANGER_ENDPOINT> \
+--header 'trustee-public-key: <PUBLIC_KEY>' \
+--header 'trustee-timestamp: 1624455217149' \
+--header 'trustee-signature: 3ef5bd5345c1227d1e84517e2cb5d25a13a93335c7bb4e2f0327a9911d98067e6dfcef7944857d96b9b26084ac8789c1dbef4f263f8ecf74ab0865ee373676b5' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "id": "QCqQF7U2BTebKL3Z"
+}'
+```
+
+#### Response body:
+
+```JSON
+{
+    "id": "QCqQF7U2BTebKL3Z",
+    "status": "WAITING",
+    "payCryptoAddress": "1BLvYTj7oDgYVA21sYNdxj96dKoUHvdazc",
+    "toPaymentDetails": "0xc24D2f7E2d6355dCe30C45CcDdA56b5C5fecC254",
+    "from": "BTC",
+    "to": "ETH",
+    "fromAmount": 0.001,
+    "toAmount": 0.013048,
+    "fromAmountReceived": 0,
+    "fromRate": 1,
+    "toRate": 16.682383815934614,
+    "fromFee": 0,
+    "toFee": 0.0036,
+    "extraFromFee": 0.000002,
+    "extraToFee": 0
 }
 ```
 
