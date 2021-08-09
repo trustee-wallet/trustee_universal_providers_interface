@@ -1,5 +1,11 @@
 # Change Log
 
+## 2021-08-09
+
+### Added
+
+- Added new optional endpoint for restoring EXPIRED orders. [Doc](https://github.com/trustee-wallet/trustee_universal_providers_interface#post-restore-expired-order).
+
 ## 2021-07-28
 
 ### Added

@@ -512,7 +512,7 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 }
 ```
 
-## POST: Restore EXPIRED order
+## POST: Restore EXPIRED order (optional)
 
 > The endpoint must have request and response authentication.
 
