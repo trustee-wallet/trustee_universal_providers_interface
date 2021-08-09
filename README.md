@@ -289,7 +289,7 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **toAmount** | Number  | required | The amount that the client will receive. |
 | **fromAmountReceived**\*\* | Number  | optional | The amount without a bank fee if it is (*only for Fiat -> Crypto exchange ways*). |
 | **userId** | String  | optional | Anonymous user ID. |
-| **redirectUrl** | String  | required | The amount that the client will receive. |
+| **redirectUrl** | String  | required | Url where you need to redirect the user after payment via payUrl (only for fiat deposit). |
 | **toPaymentDetails** | String  | required | Payment details of where the user will receive funds. |
 | **fromPaymentDetails** | String  | optional | Payment details from which will take funds. |
 | **toMemo** | String  | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
@@ -384,7 +384,7 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **toAmount** | Number  | required | The amount that the client will receive. |
 | **fromAmountReceived**\*\* | Number  | optional | The amount without a bank fee if it is (*only for Fiat -> Crypto exchange ways*). |
 | **userId** | String  | optional | Anonymous user ID. |
-| **redirectUrl** | String  | required | The amount that the client will receive. |
+| **redirectUrl** | String  | required | Url where you need to redirect the user after payment via payUrl (only for fiat deposit). |
 | **toPaymentDetails** | String  | required | Payment details of where the user will receive funds. |
 | **fromPaymentDetails** | String  | optional | Payment details from which will take funds. |
 | **toMemo** | String  | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
@@ -537,7 +537,7 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **toAmount** | Number  | required | **Actual** amount that the client will receive. |
 | **fromAmountReceived**\*\* | Number  | optional | The amount without a bank fee if it is (*only for Fiat -> Crypto exchange ways*). |
 | **userId** | String  | optional | Anonymous user ID. |
-| **redirectUrl** | String  | required | The amount that the client will receive. |
+| **redirectUrl** | String  | required | Url where you need to redirect the user after payment via payUrl (only for fiat deposit). |
 | **toPaymentDetails** | String  | required | Payment details of where the user will receive funds. |
 | **fromPaymentDetails** | String  | optional | Payment details from which will take funds. |
 | **toMemo** | String  | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
