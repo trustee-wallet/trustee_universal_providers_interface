@@ -1,5 +1,34 @@
 # Change Log
 
+## 2021-08-18
+
+### Added
+
+- Added support for fixed rate exchange ways:
+
+#### Exchange ways list endpoint:
+
+- Added **ratetype** optional parameter.
+
+#### Estimate amount endpoint:
+
+- Added **rateType** optional parameter for request body.
+- Added **rateType** optional parameter for response body. Added **rateId** and **rateIdExpirationTimestamp** required parameters for response body if **rateType** is equals to **FIXED**.
+
+#### Create order endpoint:
+
+- Added **rateType** (optional) parameter and **rateId** (required if **rateType** is **FIXED**) parameter for request body.
+- Added **rateType** optional parameter for response body.
+- Added **errorCode** parameter in case of error. Added support of **EXPIRED_RATE errorCode**.
+
+#### Check order endpoint:
+
+- Added **rateType** optional parameter for response body.
+
+#### Restore EXPIRED order endpoint:
+
+- Added **rateType** optional parameter for response body.
+
 ## 2021-08-09
 
 ### Added

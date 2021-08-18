@@ -48,6 +48,12 @@ If you need to specify a fixed and percentage fee together, then you can do this
 <fromfee>1.5 %</fromfee>
 ```
 
+If you need to specify a rate type, then you can do this as follows. Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default).
+
+```xml
+<ratetype>FLOATING</ratetype>
+```
+
 ## Authentication
 
 Methods **estimate amount**, **create order**, **check order** and **cancel order** must be authenticated.
@@ -156,6 +162,7 @@ curl --location --request POST 'https://testapiv3.trustee.deals/trustee-universa
 | **fromAmount** or **toAmount** | Number  | required | The amount for which you need to calculate. Transmitted in the **from** currency or **to** currency. |
 | **extraFromFee**\*  | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **from** currency. |
 | **extraToFee**\*  | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **to** currency. |
+| **rateType**  | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
 
 \* – If Trustee fee is 0.5% then 0.005 must be transmitted to **extraFromFee** and/or **extraToFee**.
 
@@ -175,8 +182,13 @@ curl --location --request POST 'https://testapiv3.trustee.deals/trustee-universa
 | **toFee**  | Number | required | Exchanger fee which will be taken from the **to** currency. | 0.0005 |
 | **extraFromFee**  | Number | required | Trustee fee which will be taken from the **from** currency. | 32.5 |
 | **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. | 0 |
+| **rateType**  | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
+| **rateId**  | String | required if **rateType** is **FIXED** | Rate identifier for a **FIXED** rate flow. |
+| **rateIdExpirationTimestamp**\*\*  | Number | required if **rateType** is **FIXED** | Timestamp when the **FIXED** rate becomes expired. |
 
 \* – One of the parameters (**fromRate** or **toRate**) must be "1", and the other show the rate.
+
+\*\* – The lifetime of the **FIXED** rate must be at least 30 seconds from the time of the request.
 
 #### Calculation example:
 
@@ -270,6 +282,8 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **toMemo** | String  | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
 | **extraFromFee**\*  | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **from** currency. |
 | **extraToFee**\*  | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **to** currency. |
+| **rateType**  | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
+| **rateId**  | String | required if **rateType** is **FIXED** | Rate identifier for a **FIXED** rate flow. |
 
 \* – If Trustee fee is 0.5% then 0.005 must be transmitted to **extraFromFee** and/or **extraToFee**.
 
@@ -295,6 +309,7 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **toMemo** | String  | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
 | **extraFromFee**  | Number | required | Trustee fee which will be taken from the **from** currency. |
 | **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. |
+| **rateType**  | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
 
 \* – Only one of the parameter must be returned in the response (**payUrl** or **payCryptoAddress**). It depends on whether the client needs to make a fiat deposit (**payUrl** must be returned) or crypto deposit (**payCryptoAddress** must be returned).
 
@@ -306,7 +321,15 @@ All parameters that were used when creating should return to the response.
 
 | Parameter | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
+| **errorCode** | String  | required | Code for error. |
 | **message**  | String | required | Error description. |
+
+#### Error codes list:
+
+| Parameter |  Description |
+| ------ | ------ |
+| **EXPIRED_RATE** | Rate for **FIXED** rate flow was expired. |
+| **PROVIDER_ERROR**  | Any other error. |
 
 ### Example for crypto deposit:
 
@@ -392,6 +415,7 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **toTxHash** | String  | required | Hash transaction of payment to the client. |
 | **extraFromFee**  | Number | required | Trustee fee which will be taken from the **from** currency. |
 | **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. |
+| **rateType**  | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
 
 \* – Only one of the parameter must be returned in the response (**payUrl** or **payCryptoAddress**). It depends on whether the client needs to make a fiat deposit (**payUrl** must be returned) or crypto deposit (**payCryptoAddress** must be returned).
 
@@ -545,6 +569,7 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **toTxHash** | String  | required | Hash transaction of payment to the client. |
 | **extraFromFee**  | Number | required | Trustee fee which will be taken from the **from** currency. |
 | **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. |
+| **rateType**  | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
 
 \* – Only one of the parameter must be returned in the response (**payUrl** or **payCryptoAddress**). It depends on whether the client needs to make a fiat deposit (**payUrl** must be returned) or crypto deposit (**payCryptoAddress** must be returned).
 
