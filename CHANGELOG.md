@@ -1,5 +1,11 @@
 # Change Log
 
+## 2021-08-23
+
+### Added
+
+- Added **fromRate** and **toRate** optional parameters for error body of "Estimate amount" endpoint.
+
 ## 2021-08-18
 
 ### Added

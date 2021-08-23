@@ -207,10 +207,14 @@ Trustee fee is 0.5%.
 | **errorCode** | String  | required | Code for error. |
 | **message**  | String | required | Error description. |
 | **minAmount** or **maxAmount**\* | Number  | required\* | The limit on which the user has not passed. You need to transmit only one parameter. |
+| **fromRate**\*\* | Number  | optional | Rate that is represented in the **from** currency. |
+| **toRate**\*\* | Number  | optional | Rate that is represented in the **to** currency. |
 
 \* – **minAmount** or **maxAmount** must be transmitted only when the **errorCode** is equal to "EXCEEDING_LIMITS".
 If the **fromAmount** was transmitted to the request, then the **minAmount** or **maxAmount** must be specified in the **from** currency.
 If the **toAmount** was transmitted to the request, then the **minAmount** or **maxAmount** must be specified in the **to** currency.
+
+\*\* – One of the parameters (**fromRate** or **toRate**) must be "1", and the other show the rate.
 
 #### Error codes list:
 
