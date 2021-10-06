@@ -202,6 +202,8 @@ Trustee fee is 0.5%.
 
 #### In case of error:
 
+> Response status code should not be 2XX
+
 | Parameter | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
 | **errorCode** | String  | required | Code for error. |
@@ -323,6 +325,8 @@ All parameters that were used when creating should return to the response.
 
 #### In case of error:
 
+> Response status code should not be 2XX
+
 | Parameter | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
 | **errorCode** | String  | required | Code for error. |
@@ -442,6 +446,9 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **HOLDED** | The warrant is suspended to check KYC. |
 
 #### In case of error:
+
+> Response status code should not be 2XX
+
 | Parameter | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
 | **message**  | String | required | Error description. |
@@ -488,7 +495,7 @@ curl --location --request GET '<EXCHANGER_ENDPOINT>?id=QCqQF7U2BTebKL3Z' \
 }
 ```
 
-## POST: Cancel order
+## POST: Cancel order (optional)
 
 > The endpoint must have request and response authentication.
 
@@ -504,6 +511,9 @@ curl --location --request GET '<EXCHANGER_ENDPOINT>?id=QCqQF7U2BTebKL3Z' \
 | **status** | String  | required | Status of the canceling. | SUCCESS |
 
 #### In case of error:
+
+> Response status code should not be 2XX
+
 | Parameter | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
 | **message**  | String | required | Error description. |
@@ -580,6 +590,9 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 \*\* If **fromAmount** = 500 UAH and bank fee = 3%, then **fromAmountReceived** = 485 UAH.
 
 #### In case of error:
+
+> Response status code should not be 2XX
+
 | Parameter | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
 | **message**  | String | required | Error description. |
