@@ -48,7 +48,7 @@ If you need to specify a fixed and percentage fee together, then you can do this
 <fromfee>1.5 %</fromfee>
 ```
 
-If you need to specify a rate type, then you can do this as follows. Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default).
+If you need to specify a rate type, then you can do this as follows. The interface supports 2 rate types: **FLOATING** and **FIXED** (**FLOATING** by default).
 
 ```xml
 <ratetype>FLOATING</ratetype>
