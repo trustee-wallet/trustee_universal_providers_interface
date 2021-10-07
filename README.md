@@ -182,6 +182,8 @@ curl --location --request POST 'https://testapiv3.trustee.deals/trustee-universa
 | **toFee**  | Number | required | Exchanger fee which will be taken from the **to** currency. | 0.0005 |
 | **extraFromFee**  | Number | required | Trustee fee which will be taken from the **from** currency. | 32.5 |
 | **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. | 0 |
+| **fromRevenueShare**  | Number | required | Revenue share which will be taken from the **from** currency. | 0 |
+| **toRevenueShare**  | Number | required | Revenue share which will be taken from the **to** currency. | 0 |
 | **rateType**  | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
 | **rateId**  | String | required if **rateType** is **FIXED** | Rate identifier for a **FIXED** rate flow. |
 | **rateIdExpirationTimestamp**\*\*  | Number | required if **rateType** is **FIXED** | Timestamp when the **FIXED** rate becomes expired. |
@@ -256,7 +258,9 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
     "fromFee": 0,
     "toFee": 0.0036,
     "extraFromFee": 0.000002,
-    "extraToFee": 0
+    "extraToFee": 0,
+    "fromRevenueShare": 0,
+    "toRevenueShare": 0
 }
 ```
 
@@ -315,6 +319,8 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **toMemo** | String  | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
 | **extraFromFee**  | Number | required | Trustee fee which will be taken from the **from** currency. |
 | **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. |
+| **fromRevenueShare**  | Number | required | Revenue share which will be taken from the **from** currency. |
+| **toRevenueShare**  | Number | required | Revenue share which will be taken from the **to** currency. |
 | **rateType**  | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
 
 \* – Only one of the parameter must be returned in the response (**payUrl** or **payCryptoAddress**). It depends on whether the client needs to make a fiat deposit (**payUrl** must be returned) or crypto deposit (**payCryptoAddress** must be returned).
@@ -377,7 +383,9 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
     "fromFee": 0,
     "toFee": 0.0036,
     "extraFromFee": 0.000002,
-    "extraToFee": 0
+    "extraToFee": 0,
+    "fromRevenueShare": 0,
+    "toRevenueShare": 0
 }
 ```
 
@@ -423,6 +431,8 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **toTxHash** | String  | required | Hash transaction of payment to the client. |
 | **extraFromFee**  | Number | required | Trustee fee which will be taken from the **from** currency. |
 | **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. |
+| **fromRevenueShare**  | Number | required | Revenue share which will be taken from the **from** currency. |
+| **toRevenueShare**  | Number | required | Revenue share which will be taken from the **to** currency. |
 | **rateType**  | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
 
 \* – Only one of the parameter must be returned in the response (**payUrl** or **payCryptoAddress**). It depends on whether the client needs to make a fiat deposit (**payUrl** must be returned) or crypto deposit (**payCryptoAddress** must be returned).
@@ -482,7 +492,9 @@ curl --location --request GET '<EXCHANGER_ENDPOINT>?id=QCqQF7U2BTebKL3Z' \
     "fromFee": 0,
     "toFee": 0.0036,
     "extraFromFee": 0.000002,
-    "extraToFee": 0
+    "extraToFee": 0,
+    "fromRevenueShare": 0,
+    "toRevenueShare": 0
 }
 ```
 
@@ -583,6 +595,8 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **toTxHash** | String  | required | Hash transaction of payment to the client. |
 | **extraFromFee**  | Number | required | Trustee fee which will be taken from the **from** currency. |
 | **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. |
+| **fromRevenueShare**  | Number | required | Revenue share which will be taken from the **from** currency. |
+| **toRevenueShare**  | Number | required | Revenue share which will be taken from the **to** currency. |
 | **rateType**  | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
 
 \* – Only one of the parameter must be returned in the response (**payUrl** or **payCryptoAddress**). It depends on whether the client needs to make a fiat deposit (**payUrl** must be returned) or crypto deposit (**payCryptoAddress** must be returned).
@@ -630,7 +644,9 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
     "fromFee": 0,
     "toFee": 0.0036,
     "extraFromFee": 0.000002,
-    "extraToFee": 0
+    "extraToFee": 0,
+    "fromRevenueShare": 0,
+    "toRevenueShare": 0
 }
 ```
 

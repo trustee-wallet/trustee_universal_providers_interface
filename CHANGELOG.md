@@ -1,5 +1,14 @@
 # Change Log
 
+## 2021-10-07
+
+### Added
+
+- Added **fromRevenueShare** and **toRevenueShare** required parameters for response body of "Estimate amount" endpoint.
+- Added **fromRevenueShare** and **toRevenueShare** required parameters for response body of "Create order" endpoint.
+- Added **fromRevenueShare** and **toRevenueShare** required parameters for response body of "Check order" endpoint.
+- Added **fromRevenueShare** and **toRevenueShare** required parameters for response body of "Restore EXPIRED order" endpoint.
+
 ## 2021-08-23
 
 ### Added
