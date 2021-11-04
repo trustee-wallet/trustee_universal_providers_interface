@@ -1,5 +1,12 @@
 # Change Log
 
+## 2021-11-04
+
+### Added
+
+- Added **fromnetwork** and **tonetwork** optional parameters for exchange ways list.
+- Added **fromcontract** and **tocontract** optional parameters for exchange ways list.
+
 ## 2021-10-07
 
 ### Added

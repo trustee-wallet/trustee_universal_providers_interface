@@ -54,6 +54,29 @@ If you need to specify a rate type, then you can do this as follows. The interfa
 <ratetype>FLOATING</ratetype>
 ```
 
+Trustee support tokens of different networks. As an optional parameter, you can specify a currency network code.
+
+```xml
+<fromnetwork>ETH</fromnetwork>
+<tonetwork>BSC</tonetwork>
+```
+
+Universal interface supports the following networks:
+
+| Network code |  Description |
+| ------ | ------ |
+| **ETH** | Ethereum. |
+| **BSC**  | Binance Smart Chain. |
+| **TRX** | Tron. |
+| **SOL** | Solana. |
+
+Also, users can add various tokens if there are no default support. In this case, Trustee will try to find exchange ways of such tokens in you. In order to implement the search for such tokens you can add the following optional parameters. You can specify only one of them or both.
+
+```xml
+<fromcontract>0xdac17f958d2ee523a2206206994597c13d831ec7</fromcontract>
+<tocontract>0x1f9840a85d5af5bf1d1762f925bdaddc4201f984</tocontract>
+```
+
 ## Authentication
 
 Methods **estimate amount**, **create order**, **check order** and **cancel order** must be authenticated.
