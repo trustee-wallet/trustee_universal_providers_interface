@@ -69,6 +69,7 @@ Universal interface supports the following networks:
 | **BSC**  | Binance Smart Chain. |
 | **TRX** | Tron. |
 | **SOL** | Solana. |
+| **OMNI** | Bitcoin Omni. |
 
 Also, users can add various tokens if there are no default support. In this case, Trustee will try to find exchange ways of such tokens in you. In order to implement the search for such tokens you can add the following optional parameters. You can specify only one of them or both.
 
