@@ -183,6 +183,8 @@ curl --location --request POST 'https://testapiv3.trustee.deals/trustee-universa
 | ------ | ------ | ------ | ------ |
 | **from** | String  | required | Code for **from** currency. Same as in the exchange ways list. |
 | **to**  | String | required | Code for **to** currency. Same as in the exchange ways list. |
+| **fromNetwork**  | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. |
+| **toNetwork**  | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. |
 | **fromAmount** or **toAmount** | Number  | required | The amount for which you need to calculate. Transmitted in the **from** currency or **to** currency. |
 | **extraFromFee**\*  | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **from** currency. |
 | **extraToFee**\*  | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **to** currency. |
@@ -307,6 +309,8 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | ------ | ------ | ------ | ------ |
 | **from** | String  | required | Code for **from** currency. Same as in the exchange ways list. |
 | **to**  | String | required | Code for **to** currency. Same as in the exchange ways list. |
+| **fromNetwork**  | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. |
+| **toNetwork**  | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. |
 | **fromAmount** | Number  | required | The amount that the client must pay. |
 | **toAmount** | Number  | required | The amount that the client will receive. |
 | **userId** | String  | optional | Anonymous user ID. |
