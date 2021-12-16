@@ -200,6 +200,8 @@ curl --location --request POST 'https://testapiv3.trustee.deals/trustee-universa
 | ------ | ------ | ------ | ------ | ------ |
 | **from** | String  | required | Code for **from** currency. Same as in the exchange ways list. | CARDRUB |
 | **to**  | String | required | Code for **to** currency. Same as in the exchange ways list. | BTC |
+| **fromNetwork**  | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. | null |
+| **toNetwork**  | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. | BTC |
 | **fromAmount** | Number  | required | The amount that the client must pay. | 6500 |
 | **toAmount** | Number  | required | The amount that the client will receive. | 0.0016 |
 | **fromRate**\* | Number  | required | Rate that is represented in the **from** currency. | 3079761.9 |
@@ -277,6 +279,8 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 {
     "from": "BTC",
     "to": "ETH",
+    "fromNetwork": "BTC",
+    "toNetwork": "ETH",
     "fromAmount": 0.001,
     "toAmount": 0.013062,
     "fromRate": 1,
@@ -337,6 +341,8 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **payCryptoMemo** | String | optional | Additional information to the **payCryptoAddress** (need for example for XRP currency). |
 | **from** | String  | required | Code for **from** currency. Same as in the exchange ways list. |
 | **to**  | String | required | Code for **to** currency. Same as in the exchange ways list. |
+| **fromNetwork**  | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. |
+| **toNetwork**  | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. |
 | **fromAmount** | Number  | required | The amount that the client must pay. |
 | **toAmount** | Number  | required | The amount that the client will receive. |
 | **fromAmountReceived**\*\* | Number  | optional | The amount without a bank fee if it is (*only for Fiat -> Crypto exchange ways*). |
@@ -404,6 +410,8 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
     "toPaymentDetails": "0xc24D2f7E2d6355dCe30C45CcDdA56b5C5fecC254",
     "from": "BTC",
     "to": "ETH",
+    "fromNetwork": "BTC",
+    "toNetwork": "ETH",
     "fromAmount": 0.001,
     "toAmount": 0.013048,
     "fromRate": 1,
@@ -447,6 +455,8 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **payCryptoMemo** | String | optional | Additional information to the **payCryptoAddress** (need for example for XRP currency). |
 | **from** | String  | required | Code for **from** currency. Same as in the exchange ways list. |
 | **to**  | String | required | Code for **to** currency. Same as in the exchange ways list. |
+| **fromNetwork**  | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. |
+| **toNetwork**  | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. |
 | **fromAmount** | Number  | required | The amount that the client must pay. |
 | **toAmount** | Number  | required | The amount that the client will receive. |
 | **fromAmountReceived**\*\* | Number  | optional | The amount without a bank fee if it is (*only for Fiat -> Crypto exchange ways*). |
@@ -512,6 +522,8 @@ curl --location --request GET '<EXCHANGER_ENDPOINT>?id=QCqQF7U2BTebKL3Z' \
     "toPaymentDetails": "0xc24D2f7E2d6355dCe30C45CcDdA56b5C5fecC254",
     "from": "BTC",
     "to": "ETH",
+    "fromNetwork": "BTC",
+    "toNetwork": "ETH",
     "fromAmount": 0.001,
     "toAmount": 0.013048,
     "fromAmountReceived": 0,
@@ -611,6 +623,8 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **payCryptoMemo** | String | optional | Additional information to the **payCryptoAddress** (need for example for XRP currency). |
 | **from** | String  | required | Code for **from** currency. Same as in the exchange ways list. |
 | **to**  | String | required | Code for **to** currency. Same as in the exchange ways list. |
+| **fromNetwork**  | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. |
+| **toNetwork**  | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. |
 | **fromAmount** | Number  | required | The amount that the client must pay. |
 | **toAmount** | Number  | required | **Actual** amount that the client will receive. |
 | **fromAmountReceived**\*\* | Number  | optional | The amount without a bank fee if it is (*only for Fiat -> Crypto exchange ways*). |
@@ -664,6 +678,8 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
     "toPaymentDetails": "0xc24D2f7E2d6355dCe30C45CcDdA56b5C5fecC254",
     "from": "BTC",
     "to": "ETH",
+    "fromNetwork": "BTC",
+    "toNetwork": "ETH",
     "fromAmount": 0.001,
     "toAmount": 0.013048,
     "fromAmountReceived": 0,
