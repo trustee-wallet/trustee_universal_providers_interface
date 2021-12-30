@@ -66,7 +66,7 @@ Universal interface supports the following networks:
 | Network code |  Description |
 | ------ | ------ |
 | **ETH** | Ethereum. |
-| **BSC**  | Binance Smart Chain. |
+| **BSC** | Binance Smart Chain. |
 | **TRX** | Tron. |
 | **SOL** | Solana. |
 | **OMNI** | Bitcoin Omni. |
@@ -96,8 +96,8 @@ API keys are generated once by any side (Trustee or exchanger) and then share th
 
 | Header | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
-| **trustee-public-key** | String  | optional | Partner's public key. |
-| **trustee-timestamp**  | String | required | Timestamp that was used to generate the signature. |
+| **trustee-public-key** | String | optional | Partner's public key. |
+| **trustee-timestamp** | String | required | Timestamp that was used to generate the signature. |
 | **trustee-signature** | String | required | Signature. |
 | **trustee-env** | String | optional | The environment where a request is sent *(LOCAL, DEV or PROD)*. |
 
@@ -118,22 +118,22 @@ body that will be used to generate signature.
 | Header | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
 | **trustee-public-key** | String  | required | Partner's public key. |
-| **trustee-timestamp**  | String | required | Timestamp which will be used to generate signature. |
+| **trustee-timestamp** | String | required | Timestamp which will be used to generate signature. |
 
 ### Response body:
 
 | Parameter | Type |  Description |
 | ------ | ------ | ------ |
-| **parametersSequence** | String  | Sequence of parameters for **initString**. |
-| **initString**  | String | A string that will be used to generate a signature. |
-| **signature**  | String | Signature for request body. |
+| **parametersSequence** | String | Sequence of parameters for **initString**. |
+| **initString** | String | A string that will be used to generate a signature. |
+| **signature** | String | Signature for request body. |
 
 ### Response headers:
 
 | Header | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
-| **trustee-timestamp** | String  | required | Timestamp which was used to generate a response signature. |
-| **trustee-signature**  | String | required | Signature for response body. |
+| **trustee-timestamp** | String | required | Timestamp which was used to generate a response signature. |
+| **trustee-signature** | String | required | Signature for response body. |
 
 With the help of **response based auth headers**, you can check the generation of response signature. It is identical to the request signature process.
 
@@ -181,14 +181,14 @@ curl --location --request POST 'https://testapiv3.trustee.deals/trustee-universa
 
 | Parameter | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
-| **from** | String  | required | Code for **from** currency. Same as in the exchange ways list. |
-| **to**  | String | required | Code for **to** currency. Same as in the exchange ways list. |
-| **fromNetwork**  | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. |
-| **toNetwork**  | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. |
+| **from** | String | required | Code for **from** currency. Same as in the exchange ways list. |
+| **to** | String | required | Code for **to** currency. Same as in the exchange ways list. |
+| **fromNetwork** | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. |
+| **toNetwork** | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. |
 | **fromAmount** or **toAmount** | Number  | required | The amount for which you need to calculate. Transmitted in the **from** currency or **to** currency. |
-| **extraFromFee**\*  | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **from** currency. |
-| **extraToFee**\*  | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **to** currency. |
-| **rateType**  | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
+| **extraFromFee**\* | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **from** currency. |
+| **extraToFee**\* | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **to** currency. |
+| **rateType** | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
 
 \* – If Trustee fee is 0.5% then 0.005 must be transmitted to **extraFromFee** and/or **extraToFee**.
 
@@ -199,26 +199,29 @@ curl --location --request POST 'https://testapiv3.trustee.deals/trustee-universa
 | Parameter | Type | Required |  Description | Example
 | ------ | ------ | ------ | ------ | ------ |
 | **from** | String  | required | Code for **from** currency. Same as in the exchange ways list. | CARDRUB |
-| **to**  | String | required | Code for **to** currency. Same as in the exchange ways list. | BTC |
-| **fromNetwork**  | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. | null |
-| **toNetwork**  | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. | BTC |
-| **fromAmount** | Number  | required | The amount that the client must pay. | 6500 |
-| **toAmount** | Number  | required | The amount that the client will receive. | 0.0016 |
-| **fromRate**\* | Number  | required | Rate that is represented in the **from** currency. | 3079761.9 |
-| **toRate**\* | Number  | required | Rate that is represented in the **to** currency. | 1 |
-| **fromFee**  | Number | required | Exchanger fee which will be taken from the **from** currency. | 0 |
-| **toFee**  | Number | required | Exchanger fee which will be taken from the **to** currency. | 0.0005 |
-| **extraFromFee**  | Number | required | Trustee fee which will be taken from the **from** currency. | 32.5 |
-| **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. | 0 |
-| **fromRevenueShare**  | Number | required | Revenue share which will be taken from the **from** currency. | 0 |
-| **toRevenueShare**  | Number | required | Revenue share which will be taken from the **to** currency. | 0 |
-| **rateType**  | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
-| **rateId**  | String | required if **rateType** is **FIXED** | Rate identifier for a **FIXED** rate flow. |
-| **rateIdExpirationTimestamp**\*\*  | Number | required if **rateType** is **FIXED** | Timestamp when the **FIXED** rate becomes expired. |
+| **to** | String | required | Code for **to** currency. Same as in the exchange ways list. | BTC |
+| **fromNetwork** | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. | null |
+| **toNetwork** | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. | BTC |
+| **fromAmount** | Number | required | The amount that the client must pay. | 6500 |
+| **toAmount** | Number | required | The amount that the client will receive. | 0.0016 |
+| **fromRate**\* | Number | required | Rate that is represented in the **from** currency. | 3079761.9 |
+| **toRate**\* | Number | required | Rate that is represented in the **to** currency. | 1 |
+| **fromFee** | Number | required | Exchanger fee which will be taken from the **from** currency. | 0 |
+| **toFee** | Number | required | Exchanger fee which will be taken from the **to** currency. | 0.0005 |
+| **extraFromFee**\*\* | Number | required | Trustee fee which will be taken from the **from** currency. | 32.5 |
+| **extraToFee**\*\* | Number | required | Trustee fee which will be taken from the **to** currency. | 0 |
+| **fromRevenueShare**\*\* | Number | required | Revenue share which will be taken from the **from** currency. | 0 |
+| **toRevenueShare**\*\* | Number | required | Revenue share which will be taken from the **to** currency. | 0 |
+| **rateType** | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
+| **rateId** | String | required if **rateType** is **FIXED** | Rate identifier for a **FIXED** rate flow. |
+| **rateIdExpirationTimestamp**\*\*\* | Number | required if **rateType** is **FIXED** | Timestamp when the **FIXED** rate becomes expired. |
 
 \* – One of the parameters (**fromRate** or **toRate**) must be "1", and the other show the rate.
 
-\*\* – The lifetime of the **FIXED** rate must be at least 30 seconds from the time of the request.
+\*\* – Parameters **extraFromFee**, **extraToFee**, **fromRevenueShare**, **toRevenueShare** in response must return already calculated values. For example:
+Request – **extraFromFee**: 0.005. 0.5% from 6500 = 32.5, so Response – **extraFromFee**: 32.5.
+
+\*\*\* – The lifetime of the **FIXED** rate must be at least 30 seconds from the time of the request.
 
 #### Calculation example:
 
@@ -236,11 +239,11 @@ Trustee fee is 0.5%.
 
 | Parameter | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
-| **errorCode** | String  | required | Code for error. |
-| **message**  | String | required | Error description. |
-| **minAmount** or **maxAmount**\* | Number  | required\* | The limit on which the user has not passed. You need to transmit only one parameter. |
-| **fromRate**\*\* | Number  | optional | Rate that is represented in the **from** currency. |
-| **toRate**\*\* | Number  | optional | Rate that is represented in the **to** currency. |
+| **errorCode** | String | required | Code for error. |
+| **message** | String | required | Error description. |
+| **minAmount** or **maxAmount**\* | Number | required\* | The limit on which the user has not passed. You need to transmit only one parameter. |
+| **fromRate**\*\* | Number | optional | Rate that is represented in the **from** currency. |
+| **toRate**\*\* | Number | optional | Rate that is represented in the **to** currency. |
 
 \* – **minAmount** or **maxAmount** must be transmitted only when the **errorCode** is equal to "EXCEEDING_LIMITS".
 If the **fromAmount** was transmitted to the request, then the **minAmount** or **maxAmount** must be specified in the **from** currency.
@@ -253,7 +256,7 @@ If the **toAmount** was transmitted to the request, then the **minAmount** or **
 | Parameter |  Description |
 | ------ | ------ |
 | **EXCEEDING_LIMITS** | The user has not passed on acceptable limits. |
-| **PROVIDER_ERROR**  | Any other error. |
+| **PROVIDER_ERROR** | Any other error. |
 
 ### Example:
 
@@ -311,21 +314,21 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 
 | Parameter | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
-| **from** | String  | required | Code for **from** currency. Same as in the exchange ways list. |
-| **to**  | String | required | Code for **to** currency. Same as in the exchange ways list. |
-| **fromNetwork**  | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. |
-| **toNetwork**  | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. |
-| **fromAmount** | Number  | required | The amount that the client must pay. |
-| **toAmount** | Number  | required | The amount that the client will receive. |
-| **userId** | String  | optional | Anonymous user ID. |
-| **redirectUrl** | String  | required | Url where you need to redirect the user after payment via **payUrl** (only for fiat deposit). |
-| **toPaymentDetails** | String  | required | Payment details of where the user will receive funds. |
-| **fromPaymentDetails** | String  | optional | Payment details from which will take funds. |
-| **toMemo** | String  | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
-| **extraFromFee**\*  | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **from** currency. |
-| **extraToFee**\*  | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **to** currency. |
-| **rateType**  | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
-| **rateId**  | String | required if **rateType** is **FIXED** | Rate identifier for a **FIXED** rate flow. |
+| **from** | String | required | Code for **from** currency. Same as in the exchange ways list. |
+| **to** | String | required | Code for **to** currency. Same as in the exchange ways list. |
+| **fromNetwork** | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. |
+| **toNetwork** | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. |
+| **fromAmount** | Number | required | The amount that the client must pay. |
+| **toAmount** | Number | required | The amount that the client will receive. |
+| **userId** | String | optional | Anonymous user ID. |
+| **redirectUrl** | String | required | Url where you need to redirect the user after payment via **payUrl** (only for fiat deposit). |
+| **toPaymentDetails** | String | required | Payment details of where the user will receive funds. |
+| **fromPaymentDetails** | String | optional | Payment details from which will take funds. |
+| **toMemo** | String | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
+| **extraFromFee**\* | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **from** currency. |
+| **extraToFee**\* | Number | required if the exchanger supports\*\* | Trustee fee which will be taken from the **to** currency. |
+| **rateType** | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
+| **rateId** | String | required if **rateType** is **FIXED** | Rate identifier for a **FIXED** rate flow. |
 
 \* – If Trustee fee is 0.5% then 0.005 must be transmitted to **extraFromFee** and/or **extraToFee**.
 
@@ -339,27 +342,30 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **payUrl**\* | String | required\* | Link to pay fiat. It needs to be opened to the client. |
 | **payCryptoAddress**\* | String | required\* | Cryptocurrency address where the client needs to send money. |
 | **payCryptoMemo** | String | optional | Additional information to the **payCryptoAddress** (need for example for XRP currency). |
-| **from** | String  | required | Code for **from** currency. Same as in the exchange ways list. |
-| **to**  | String | required | Code for **to** currency. Same as in the exchange ways list. |
-| **fromNetwork**  | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. |
-| **toNetwork**  | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. |
-| **fromAmount** | Number  | required | The amount that the client must pay. |
-| **toAmount** | Number  | required | The amount that the client will receive. |
-| **fromAmountReceived**\*\* | Number  | optional | The amount without a bank fee if it is (*only for Fiat -> Crypto exchange ways*). |
-| **userId** | String  | optional | Anonymous user ID. |
-| **redirectUrl** | String  | required | Url where you need to redirect the user after payment via payUrl (only for fiat deposit). |
-| **toPaymentDetails** | String  | required | Payment details of where the user will receive funds. |
-| **fromPaymentDetails** | String  | optional | Payment details from which will take funds. |
-| **toMemo** | String  | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
-| **extraFromFee**  | Number | required | Trustee fee which will be taken from the **from** currency. |
-| **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. |
-| **fromRevenueShare**  | Number | required | Revenue share which will be taken from the **from** currency. |
-| **toRevenueShare**  | Number | required | Revenue share which will be taken from the **to** currency. |
-| **rateType**  | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
+| **from** | String | required | Code for **from** currency. Same as in the exchange ways list. |
+| **to** | String | required | Code for **to** currency. Same as in the exchange ways list. |
+| **fromNetwork** | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. |
+| **toNetwork** | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. |
+| **fromAmount** | Number | required | The amount that the client must pay. |
+| **toAmount** | Number | required | The amount that the client will receive. |
+| **fromAmountReceived**\*\* | Number | optional | The amount without a bank fee if it is (*only for Fiat -> Crypto exchange ways*). |
+| **userId** | String | optional | Anonymous user ID. |
+| **redirectUrl** | String | required | Url where you need to redirect the user after payment via payUrl (only for fiat deposit). |
+| **toPaymentDetails** | String | required | Payment details of where the user will receive funds. |
+| **fromPaymentDetails** | String | optional | Payment details from which will take funds. |
+| **toMemo** | String | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
+| **extraFromFee**\*\*\* | Number | required | Trustee fee which will be taken from the **from** currency. |
+| **extraToFee**\*\*\* | Number | required | Trustee fee which will be taken from the **to** currency. |
+| **fromRevenueShare**\*\*\* | Number | required | Revenue share which will be taken from the **from** currency. |
+| **toRevenueShare**\*\*\* | Number | required | Revenue share which will be taken from the **to** currency. |
+| **rateType** | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
 
 \* – Only one of the parameter must be returned in the response (**payUrl** or **payCryptoAddress**). It depends on whether the client needs to make a fiat deposit (**payUrl** must be returned) or crypto deposit (**payCryptoAddress** must be returned).
 
 \*\* If **fromAmount** = 500 UAH and bank fee = 3%, then **fromAmountReceived** = 485 UAH.
+
+\*\*\* – Parameters **extraFromFee**, **extraToFee**, **fromRevenueShare**, **toRevenueShare** in response must return already calculated values. For example:
+Request – **extraFromFee**: 0.005. 0.5% from 6500 = 32.5, so Response – **extraFromFee**: 32.5.
 
 All parameters that were used when creating should return to the response.
 
@@ -453,44 +459,47 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **payUrl**\* | String | required\* | Link to pay fiat. It needs to be opened to the client. |
 | **payCryptoAddress**\* | String | required\* | Cryptocurrency address where the client needs to send money. |
 | **payCryptoMemo** | String | optional | Additional information to the **payCryptoAddress** (need for example for XRP currency). |
-| **from** | String  | required | Code for **from** currency. Same as in the exchange ways list. |
-| **to**  | String | required | Code for **to** currency. Same as in the exchange ways list. |
-| **fromNetwork**  | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. |
-| **toNetwork**  | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. |
-| **fromAmount** | Number  | required | The amount that the client must pay. |
-| **toAmount** | Number  | required | The amount that the client will receive. |
-| **fromAmountReceived**\*\* | Number  | optional | The amount without a bank fee if it is (*only for Fiat -> Crypto exchange ways*). |
-| **userId** | String  | optional | Anonymous user ID. |
-| **redirectUrl** | String  | required | Url where you need to redirect the user after payment via payUrl (only for fiat deposit). |
-| **toPaymentDetails** | String  | required | Payment details of where the user will receive funds. |
-| **fromPaymentDetails** | String  | optional | Payment details from which will take funds. |
-| **toMemo** | String  | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
-| **fromTxHash** | String  | required | Hash transaction of client deposit. |
-| **toTxHash** | String  | required | Hash transaction of payment to the client. |
-| **extraFromFee**  | Number | required | Trustee fee which will be taken from the **from** currency. |
-| **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. |
-| **fromRevenueShare**  | Number | required | Revenue share which will be taken from the **from** currency. |
-| **toRevenueShare**  | Number | required | Revenue share which will be taken from the **to** currency. |
-| **rateType**  | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
+| **from** | String | required | Code for **from** currency. Same as in the exchange ways list. |
+| **to** | String | required | Code for **to** currency. Same as in the exchange ways list. |
+| **fromNetwork** | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. |
+| **toNetwork** | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. |
+| **fromAmount** | Number | required | The amount that the client must pay. |
+| **toAmount** | Number | required | The amount that the client will receive. |
+| **fromAmountReceived**\*\* | Number | optional | The amount without a bank fee if it is (*only for Fiat -> Crypto exchange ways*). |
+| **userId** | String | optional | Anonymous user ID. |
+| **redirectUrl** | String | required | Url where you need to redirect the user after payment via payUrl (only for fiat deposit). |
+| **toPaymentDetails** | String | required | Payment details of where the user will receive funds. |
+| **fromPaymentDetails** | String | optional | Payment details from which will take funds. |
+| **toMemo** | String | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
+| **fromTxHash** | String | required | Hash transaction of client deposit. |
+| **toTxHash** | String | required | Hash transaction of payment to the client. |
+| **extraFromFee**\*\*\* | Number | required | Trustee fee which will be taken from the **from** currency. |
+| **extraToFee**\*\*\* | Number | required | Trustee fee which will be taken from the **to** currency. |
+| **fromRevenueShare**\*\*\* | Number | required | Revenue share which will be taken from the **from** currency. |
+| **toRevenueShare**\*\*\* | Number | required | Revenue share which will be taken from the **to** currency. |
+| **rateType** | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
 
 \* – Only one of the parameter must be returned in the response (**payUrl** or **payCryptoAddress**). It depends on whether the client needs to make a fiat deposit (**payUrl** must be returned) or crypto deposit (**payCryptoAddress** must be returned).
 
 \*\* If **fromAmount** = 500 UAH and bank fee = 3%, then **fromAmountReceived** = 485 UAH.
+
+\*\*\* – Parameters **extraFromFee**, **extraToFee**, **fromRevenueShare**, **toRevenueShare** in response must return already calculated values. For example:
+Request – **extraFromFee**: 0.005. 0.5% from 6500 = 32.5, so Response – **extraFromFee**: 32.5.
 
 ### Order statuses
 
 | Status |  Description |
 | ------ | ------ |
 | **WAITING** | Waiting for client deposit. |
-| **RECEIVED**  | Received client deposit. |
+| **RECEIVED** | Received client deposit. |
 | **EXCHANGING** | Exchange is carried out. |
-| **SENDING**  | In the process of payment to the client. |
+| **SENDING** | In the process of payment to the client. |
 | **COMPLETED** | Order successfully completed. |
 | **NOT_ENTIRE_WITHDRAW**  | Not the whole amount is paid (occurs during fiat conclusions). In this case, the amount that the client has already received should be specified in **toAmount**. |
 | **REFUNDED** | The money was returned to the client. |
-| **EXPIRED**  | The order was not paid for the time allocated (some exchangers know how to automatically restore such orders by recalculating the course through another endpoint). |
+| **EXPIRED** | The order was not paid for the time allocated (some exchangers know how to automatically restore such orders by recalculating the course through another endpoint). |
 | **CANCELED** | The order was canceled. |
-| **FAILED**  | In the process of execution of the order, an error occurred. |
+| **FAILED** | In the process of execution of the order, an error occurred. |
 | **HOLDED** | The warrant is suspended to check KYC. |
 
 #### In case of error:
@@ -499,7 +508,7 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 
 | Parameter | Type | Required |  Description |
 | ------ | ------ | ------ | ------ |
-| **message**  | String | required | Error description. |
+| **message** | String | required | Error description. |
 
 ### Example:
 
@@ -633,17 +642,20 @@ curl --location --request POST <EXCHANGER_ENDPOINT> \
 | **toPaymentDetails** | String  | required | Payment details of where the user will receive funds. |
 | **fromPaymentDetails** | String  | optional | Payment details from which will take funds. |
 | **toMemo** | String  | optional | If additional data must be attached to the **toPaymentDetails**, for example for XRP currency. |
-| **fromTxHash** | String  | required | Hash transaction of client deposit. |
-| **toTxHash** | String  | required | Hash transaction of payment to the client. |
-| **extraFromFee**  | Number | required | Trustee fee which will be taken from the **from** currency. |
-| **extraToFee**  | Number | required | Trustee fee which will be taken from the **to** currency. |
-| **fromRevenueShare**  | Number | required | Revenue share which will be taken from the **from** currency. |
-| **toRevenueShare**  | Number | required | Revenue share which will be taken from the **to** currency. |
-| **rateType**  | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
+| **fromTxHash** | String | required | Hash transaction of client deposit. |
+| **toTxHash** | String | required | Hash transaction of payment to the client. |
+| **extraFromFee**\*\*\* | Number | required | Trustee fee which will be taken from the **from** currency. |
+| **extraToFee**\*\*\* | Number | required | Trustee fee which will be taken from the **to** currency. |
+| **fromRevenueShare**\*\*\* | Number | required | Revenue share which will be taken from the **from** currency. |
+| **toRevenueShare**\*\*\* | Number | required | Revenue share which will be taken from the **to** currency. |
+| **rateType** | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
 
 \* – Only one of the parameter must be returned in the response (**payUrl** or **payCryptoAddress**). It depends on whether the client needs to make a fiat deposit (**payUrl** must be returned) or crypto deposit (**payCryptoAddress** must be returned).
 
 \*\* If **fromAmount** = 500 UAH and bank fee = 3%, then **fromAmountReceived** = 485 UAH.
+
+\*\*\* – Parameters **extraFromFee**, **extraToFee**, **fromRevenueShare**, **toRevenueShare** in response must return already calculated values. For example:
+Request – **extraFromFee**: 0.005. 0.5% from 6500 = 32.5, so Response – **extraFromFee**: 32.5.
 
 #### In case of error:
 
