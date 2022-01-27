@@ -203,14 +203,14 @@ curl --location --request POST 'https://testapiv3.trustee.deals/trustee-universa
 | **fromNetwork** | String | required | Code for **fromNetwork** currency. Same as in the exchange ways list. | null |
 | **toNetwork** | String | required | Code for **toNetwork** currency. Same as in the exchange ways list. | BTC |
 | **fromAmount** | Number | required | The amount that the client must pay. | 6500 |
-| **toAmount** | Number | required | The amount that the client will receive. | 0.0016 |
+| **toAmount** | Number | required | The amount that the client will receive. | 0.001579 |
 | **fromRate**\* | Number | required | Rate that is represented in the **from** currency. | 3079761.9 |
 | **toRate**\* | Number | required | Rate that is represented in the **to** currency. | 1 |
-| **fromFee** | Number | required | Exchanger fee which will be taken from the **from** currency. | 0 |
+| **fromFee** | Number | required | Exchanger fee which will be taken from the **from** currency. | 65 |
 | **toFee** | Number | required | Exchanger fee which will be taken from the **to** currency. | 0.0005 |
-| **extraFromFee**\*\* | Number | required | Trustee fee which will be taken from the **from** currency. | 32.5 |
+| **extraFromFee**\*\* | Number | required | Trustee fee which will be taken from the **from** currency. | 32.17 |
 | **extraToFee**\*\* | Number | required | Trustee fee which will be taken from the **to** currency. | 0 |
-| **fromRevenueShare**\*\* | Number | required | Revenue share which will be taken from the **from** currency. | 0 |
+| **fromRevenueShare**\*\* | Number | required | Revenue share which will be taken from the **from** currency. | 32.5 |
 | **toRevenueShare**\*\* | Number | required | Revenue share which will be taken from the **to** currency. | 0 |
 | **rateType** | String | optional | Only **FLOATING** or **FIXED** codes are supported (**FLOATING** by default). |
 | **rateId** | String | required if **rateType** is **FIXED** | Rate identifier for a **FIXED** rate flow. |
@@ -225,13 +225,26 @@ Request – **extraFromFee**: 0.005. 0.5% from 6500 = 32.5, so Response – **ex
 
 #### Calculation example:
 
-Trustee fee is 0.5%.
+**fromFee** is 1%.
 
-0.5% from 6500 = 32.5 RUB (**extraFromFee**)
+**fromRevenueShare** is 0.5%
 
-6500 RUB – 32.5 RUB = 6467.5 RUB * 3079761.9 (**fromRate**) = 0.0021 BTC
+Trustee fee (**extraFromFee**) is 0.5%.
 
-0.0021 BTC – 0.0005 BTC (**toFee**) = 0.0016 BTC (**toAmount**).
+**fromFee** includes **fromRevenueShare**, so
+
+1% from 6500 RUB = 65 RUB (**fromFee**):
+
+- 0.5% from 6500 RUB = 32.5 RUB (provider profit);
+- 0.5% from 6500 RUB = 32.5 RUB (**fromRevenueShare**);
+
+6500 RUB - 65 RUB = 6435 RUB.
+
+0.5% from 6435 RUB = 32.17 RUB (**extraFromFee**)
+
+6435 RUB – 32.17 RUB = 6402.83 RUB / 3079761.9 (**fromRate**) = 0.002079 BTC
+
+0.002079 BTC – 0.0005 BTC (**toFee**) = 0.001579 BTC (**toAmount**).
 
 #### In case of error:
 
