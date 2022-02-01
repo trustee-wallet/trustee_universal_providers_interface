@@ -67,6 +67,8 @@ Universal interface supports the following networks:
 | ------ | ------ |
 | **ETH** | Ethereum. |
 | **BSC** | Binance Smart Chain. |
+| **MATIC** | Polygon. |
+| **FTM** | Fantom. |
 | **TRX** | Tron. |
 | **SOL** | Solana. |
 | **OMNI** | Bitcoin Omni. |
